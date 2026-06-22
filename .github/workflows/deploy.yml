@@ -18,7 +18,7 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /www/htdocs/dennis-augustin.com/
+          server-dir: /dennis-augustin.com/
           dangerous-clean-slate: true
           exclude: |
             **/.git*
