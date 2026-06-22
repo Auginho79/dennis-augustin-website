@@ -19,7 +19,6 @@ jobs:
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /dennis-augustin.com/
-          dangerous-clean-slate: true
           exclude: |
             **/.git*
             **/.git*/**
