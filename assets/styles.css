@@ -1,7 +1,57 @@
 /* =========================================================
-   Dennis Augustin â€“ zentrales Stylesheet
-   Eine Quelle der Wahrheit fÃ¼r alle Seiten (durchgÃ¤ngige CI)
+   Dennis Augustin  zentrales Stylesheet
+   Eine Quelle der Wahrheit für alle Seiten (durchgängige CI)
    ========================================================= */
+
+/* ---------- Self-hosted Fonts (DSGVO-konform) ---------- */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('fonts/fraunces-normal-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('fonts/fraunces-normal-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/fraunces-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/fraunces-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Hanken Grotesk';
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url('fonts/hanken-grotesk-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Hanken Grotesk';
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url('fonts/hanken-grotesk-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 :root{
   --ink:#0c0c0e;
@@ -75,7 +125,7 @@ h1 em{font-style:italic;color:var(--accent)}
 .stat .lab{color:var(--muted);font-size:14px;margin-top:8px;max-width:20ch}
 .stat .num span{color:var(--accent)}
 
-/* ---------- Section-KÃ¶pfe ---------- */
+/* ---------- Section-Köpfe ---------- */
 section{position:relative}
 .sec-head{margin-bottom:64px;max-width:62ch}
 .sec-head .eyebrow{margin-bottom:18px}
@@ -98,7 +148,7 @@ section{position:relative}
 .serv .more span{color:var(--accent);transition:transform .3s}
 .serv:hover .more span{transform:translateX(5px)}
 
-/* ---------- Zwei SÃ¤ulen (Startseite) ---------- */
+/* ---------- Zwei Säulen (Startseite) ---------- */
 .pillars-sec{padding:130px 0}
 .pillars{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .pillar{position:relative;border:1px solid var(--line);border-radius:24px;padding:48px 44px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.03),transparent);transition:transform .45s var(--ease),border-color .45s;display:flex;flex-direction:column}
@@ -121,7 +171,7 @@ section{position:relative}
 .bridge h2 em{font-style:italic;color:var(--accent)}
 .bridge p{margin:26px auto 0;max-width:58ch=color:var(--paper-dim);font-weight:300;font-size:18px}
 
-/* ---------- Ãœber mich ---------- */
+/* ---------- Über mich ---------- */
 .about{padding:130px 0;border-top:1px solid var(--line)}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
 .about-portrait{position:relative;aspect-ratio:4/5;border-radius:22px;overflow:hidden;background:linear-gradient(145deg,#1d1d22,#0e0e11);border:1px solid var(--line);display:flex;align-items:flex-end;justify-content:center}
