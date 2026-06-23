@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Projektstart | Dennis Augustin</title>
+
+  <!-- Self-hosted fonts (same as main site) -->
+  <style>
+    @font-face {
+      font-family: 'Fraunces';
+      font-style: normal;
+      font-weight: 300 700;
+      font-display: swap;
+      src: url('assets/fonts/fraunces-normal-latin-ext.woff2') format('woff2');
+      unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+    }
+    @font-face {
+      font-family: 'Fraunces';
+      font-style: normal;
+      font-weight: 300 700;
+      font-display: swap;
+      src: url('assets/fonts/fraunces-normal-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+    }
+    @font-face {
+      font-family: 'Fraunces';
+      font-style: italic;
+      font-weight: 400;
+      font-display: swap;
+      src: url('assets/fonts/fraunces-italic-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+    }
+    @font-face {
+      font-family: 'Hanken Grotesk';
+      font-style: normal;
+      font-weight: 300 600;
+      font-display: swap;
+      src: url('assets/fonts/hanken-grotesk-latin-ext.woff2') format('woff2');
+      unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+    }
+    @font-face {
+      font-family: 'Hanken Grotesk';
+      font-style: normal;
+      font-weight: 300 600;
+      font-display: swap;
+      src: url('assets/fonts/hanken-grotesk-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+    }
+
+    /* ============================================================
+       TOKENS
+    ============================================================ */
+    :root {
+      --ink:       #0c0c0e;
+      --ink-2:     #141417;
+      --paper:     #f4f0e8;
+      --paper-dim: #cfc8ba;
+      --muted:     #8d877c;
+      --accent:    #ff5a30;
+      --accent-soft: #ffd9cc;
+      --line:      rgba(244,240,232,.12);
+      --maxw:      760px;
+      --ease:      cubic-bezier(.2,.7,.2,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'Hanken Grotesk', system-ui, sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      padding-bottom: 100px;
+    }
+
+    /* Noise grain (same as main site) */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .04;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    ::selection { background: var(--accent); color: #fff; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ============================================================
+       SKIP LINK
+    ============================================================ */
+    .skip {
+      position: absolute;
+      left: -999px;
+      top: 0;
+      z-index: 200;
+      background: var(--accent);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 0 0 10px 0;
+    }
+    .skip:focus { left: 0; }
+
+    /* ============================================================
+       HEADER
+    ============================================================ */
+    .site-header {
+      padding: 28px 0 24px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 64px;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .logo {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -.02em;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+      color: var(--paper);
+    }
+    .logo .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .header-badge {
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ============================================================
+       HERO BLOCK
+    ============================================================ */
+    .page-hero {
+      margin-bottom: 60px;
+      position: relative;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+    .eyebrow .bar { width: 28px; height: 1px; background: var(--accent); }
+
+    .page-hero h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: clamp(36px, 6vw, 58px);
+      letter-spacing: -.025em;
+      line-height: 1.04;
+      margin-bottom: 20px;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--accent); }
+
+    .page-hero p {
+      font-size: 17px;
+      color: var(--paper-dim);
+      font-weight: 300;
+      max-width: 54ch;
+    }
+    .page-hero p a { color: var(--accent); }
+
+    /* ============================================================
+       PROGRESS
+    ============================================================ */
+    .progress-wrap { margin-bottom: 48px; }
+
+    .progress-bar {
+      height: 1px;
+      background: var(--line);
+      border-radius: 1px;
+      position: relative;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      transition: width .5s var(--ease);
+    }
+    .progress-label {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: right;
+      margin-top: 10px;
+      letter-spacing: .02em;
+    }
+
+    /* ============================================================
+       SECTIONS / CARDS
+    ============================================================ */
+    .form-section {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 38px 36px;
+      background: linear-gradient(180deg, rgba(255,255,255,.025), transparent);
+      margin-bottom: 16px;
+      transition: border-color .4s;
+    }
+    .form-section:focus-within { border-color: rgba(255,90,48,.3); }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .section-num {
+      font-family: 'Fraunces', serif;
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: .1em;
+      padding-top: 3px;
+      flex-shrink: 0;
+    }
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -.01em;
+      line-height: 1.1;
+    }
+    .section-desc {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 3px;
+      font-weight: 300;
+    }
+
+    /* ============================================================
+       FORM FIELDS — matches .field from main site
+    ============================================================ */
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .field:last-child { margin-bottom: 0; }
+
+    .field label {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: .02em;
+    }
+    .field label .req { color: var(--accent); margin-left: 2px; }
+    .field label .hint { color: var(--muted); opacity: .7; margin-left: 6px; }
+
+    .field input,
+    .field textarea,
+    .field select {
+      background: var(--ink-2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px;
+      color: var(--paper);
+      font-family: 'Hanken Grotesk', system-ui, sans-serif;
+      font-size: 15px;
+      font-weight: 300;
+      transition: border-color .3s;
+      outline: none;
+      width: 100%;
+      -webkit-appearance: none;
+    }
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus { border-color: var(--accent); }
+
+    .field input::placeholder,
+    .field textarea::placeholder { color: #4a4845; }
+
+    .field textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .field select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238d877c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 42px;
+      color-scheme: dark;
+    }
+
+    /* Field row */
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    /* ============================================================
+       RADIO / CHECKBOX — styled cards
+    ============================================================ */
+    .radio-group,
+    .check-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .check-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 8px;
+    }
+
+    .radio-item,
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: var(--ink-2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 13px 16px;
+      cursor: pointer;
+      transition: border-color .3s, background .3s;
+      user-select: none;
+    }
+
+    .radio-item:has(input:checked),
+    .check-item:has(input:checked) {
+      border-color: rgba(255, 90, 48, .5);
+      background: rgba(255, 90, 48, .06);
+    }
+
+    .radio-item input,
+    .check-item input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+    }
+
+    .radio-item-text strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--paper);
+    }
+    .radio-item-text span {
+      font-size: 12.5px;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .check-item { align-items: center; }
+    .check-item span { font-size: 14px; color: var(--paper); font-weight: 300; }
+
+    /* ============================================================
+       DIVIDER
+    ============================================================ */
+    .divider {
+      height: 1px;
+      background: var(--line);
+      margin: 22px 0;
+    }
+
+    /* ============================================================
+       SUBMIT SECTION
+    ============================================================ */
+    .submit-section {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 44px 36px;
+      background: linear-gradient(180deg, rgba(255,255,255,.02), transparent);
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .submit-section p {
+      font-size: 15px;
+      color: var(--paper-dim);
+      font-weight: 300;
+      margin-bottom: 28px;
+      max-width: 44ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--accent);
+      color: #fff;
+      padding: 14px 26px;
+      border-radius: 100px;
+      font-family: 'Hanken Grotesk', system-ui, sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      cursor: pointer;
+      border: none;
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+      box-shadow: 0 0 0 0 rgba(255,90,48,.4);
+      text-decoration: none;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px -8px rgba(255,90,48,.5);
+    }
+    .btn:active { transform: scale(.98); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--paper-dim);
+      border: 1px solid var(--line);
+      box-shadow: none;
+      margin-left: 12px;
+    }
+    .btn-ghost:hover {
+      border-color: var(--paper);
+      box-shadow: none;
+      color: var(--paper);
+    }
+
+    .btn-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .success-msg {
+      display: none;
+      margin-top: 24px;
+      padding: 18px 22px;
+      border: 1px solid rgba(255,90,48,.4);
+      border-radius: 12px;
+      background: rgba(255,90,48,.06);
+      font-size: 14.5px;
+      color: var(--paper-dim);
+      text-align: left;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .site-footer {
+      border-top: 1px solid var(--line);
+      padding: 40px 0 28px;
+      margin-top: 70px;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-inner small { color: var(--muted); font-size: 13px; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { color: var(--muted); font-size: 13px; transition: color .25s; }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 600px) {
+      .wrap { padding: 0 20px; }
+      .form-section { padding: 28px 22px; }
+      .field-row { grid-template-columns: 1fr; }
+      .check-group { grid-template-columns: 1fr; }
+      .submit-section { padding: 32px 22px; }
+      .btn-ghost { margin-left: 0; }
+    }
+
+    /* ============================================================
+       PRINT / PDF
+    ============================================================ */
+    @media print {
+      body {
+        background: #fff;
+        color: #111;
+        font-size: 12px;
+      }
+      body::after { display: none; }
+      .site-header { border-color: #ddd; }
+      .logo { color: #111; }
+      .logo .dot { background: #ff5a30; }
+      .header-badge { color: #666; }
+      .eyebrow { color: #666; }
+      .eyebrow .bar { background: #ff5a30; }
+      .page-hero h1 { color: #111; font-size: 28px; }
+      .page-hero h1 em { color: #ff5a30; }
+      .page-hero p { color: #444; }
+      .form-section {
+        background: #fff;
+        border: 1px solid #ddd;
+        break-inside: avoid;
+        margin-bottom: 12px;
+        padding: 20px;
+      }
+      .section-num { color: #ff5a30; }
+      .section-title { color: #111; }
+      .section-desc { color: #666; }
+      .field label { color: #555; }
+      .field input, .field textarea, .field select {
+        background: #f9f9f9;
+        border: 1px solid #ccc;
+        color: #111;
+      }
+      .radio-item, .check-item {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+      }
+      .radio-item-text strong { color: #111; }
+      .radio-item-text span { color: #666; }
+      .check-item span { color: #111; }
+      .progress-wrap, .submit-section, .site-footer { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip">Zum Inhalt springen</a>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="wrap">
+    <div class="header-inner">
+      <a href="https://dennis-augustin.com" class="logo">
+        <span class="dot"></span>Dennis Augustin
+      </a>
+      <span class="header-badge">Vertraulich · Nur für Kunden</span>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+
+    <!-- HERO -->
+    <div class="page-hero">
+      <div class="eyebrow"><span class="bar"></span>Projektstart</div>
+      <h1>Website-<em>Briefing</em></h1>
+      <p>
+        Damit Ihre neue Website von Anfang an in die richtige Richtung geht,
+        bitte ich Sie, diese Fragen vorab auszufüllen. Vertraulich —
+        Fragen gerne an <a href="mailto:mail@dennis-augustin.com">mail@dennis-augustin.com</a>
+      </p>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="progress-wrap">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-label" id="progressLabel">0 von 8 Abschnitten ausgefüllt</div>
+    </div>
+
+    <form id="fragebogen" novalidate>
+
+      <!-- 1. KONTAKT -->
+      <div class="form-section" data-section="1">
+        <div class="section-header">
+          <div class="section-num">01</div>
+          <div>
+            <div class="section-title">Kontaktdaten</div>
+            <div class="section-desc">Für die Projektkorrespondenz</div>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Name <span class="req">*</span></label>
+            <input type="text" name="name" placeholder="Vor- und Nachname" required>
+          </div>
+          <div class="field">
+            <label>Unternehmen</label>
+            <input type="text" name="firma" placeholder="Firmenname (falls vorhanden)">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>E-Mail <span class="req">*</span></label>
+            <input type="email" name="email" placeholder="ihre@email.de" required>
+          </div>
+          <div class="field">
+            <label>Telefon <span class="hint">optional</span></label>
+            <input type="tel" name="telefon" placeholder="+49 …">
+          </div>
+        </div>
+        <div class="field">
+          <label>Standort <span class="hint">Stadt / Region</span></label>
+          <input type="text" name="standort" placeholder="z. B. Dortmund, NRW">
+        </div>
+      </div>
+
+      <!-- 2. ANGEBOT -->
+      <div class="form-section" data-section="2">
+        <div class="section-header">
+          <div class="section-num">02</div>
+          <div>
+            <div class="section-title">Ihr Unternehmen & Angebot</div>
+            <div class="section-desc">Was Sie tun und was Sie besonders macht</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Was bieten Sie an? <span class="req">*</span></label>
+          <textarea name="angebot" placeholder="Kurze Beschreibung Ihrer Leistungen oder Produkte." rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label>Was macht Sie einzigartig? <span class="req">*</span><span class="hint">Ihr USP</span></label>
+          <textarea name="usp" placeholder="Was können Sie besser, anders oder persönlicher als andere in Ihrer Branche?" rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label>Branche</label>
+          <input type="text" name="branche" placeholder="z. B. Handwerk, Beratung, Gastronomie, Gesundheit …">
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="field">
+          <label>Gibt es bereits eine Website?</label>
+          <div class="radio-group">
+            <label class="radio-item">
+              <input type="radio" name="bestehende_website" value="nein">
+              <div class="radio-item-text"><strong>Nein</strong><span>Kompletter Neuaufbau</span></div>
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="bestehende_website" value="ja_ersetzen">
+              <div class="radio-item-text"><strong>Ja, soll ersetzt werden</strong><span>Relaunch — komplette Überarbeitung</span></div>
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="bestehende_website" value="ja_ergaenzen">
+              <div class="radio-item-text"><strong>Ja, soll ergänzt werden</strong><span>Einzelne Seiten oder Funktionen hinzufügen</span></div>
+            </label>
+          </div>
+        </div>
+        <div class="field">
+          <label>URL der bestehenden Website <span class="hint">falls vorhanden</span></label>
+          <input type="url" name="url_aktuell" placeholder="https://…">
+        </div>
+      </div>
+
+      <!-- 3. ZIELGRUPPE -->
+      <div class="form-section" data-section="3">
+        <div class="section-header">
+          <div class="section-num">03</div>
+          <div>
+            <div class="section-title">Zielgruppe</div>
+            <div class="section-desc">Wer soll die Website ansprechen?</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Wen möchten Sie erreichen? <span class="req">*</span></label>
+          <textarea name="zielgruppe" placeholder="z. B. Selbstständige zwischen 30–50, KMU im Ruhrgebiet, Privatkunden die erstmals …" rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label>Was soll ein Besucher als nächstes tun?</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="ziel_aktion" value="kontakt"><div class="radio-item-text"><strong>Kontakt aufnehmen</strong><span>Anruf, E-Mail oder Formular</span></div></label>
+            <label class="radio-item"><input type="radio" name="ziel_aktion" value="termin"><div class="radio-item-text"><strong>Termin buchen</strong><span>Online-Kalender oder Anfrage</span></div></label>
+            <label class="radio-item"><input type="radio" name="ziel_aktion" value="kaufen"><div class="radio-item-text"><strong>Etwas kaufen / bestellen</strong><span>Shop oder Direktkauf</span></div></label>
+            <label class="radio-item"><input type="radio" name="ziel_aktion" value="informieren"><div class="radio-item-text"><strong>Sich informieren</strong><span>Vertrauen aufbauen, Leistungen kennenlernen</span></div></label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Ergänzungen <span class="hint">optional</span></label>
+          <textarea name="zielgruppe_ergaenzung" placeholder="Weitere Details zur Zielgruppe …" rows="2"></textarea>
+        </div>
+      </div>
+
+      <!-- 4. DESIGN -->
+      <div class="form-section" data-section="4">
+        <div class="section-header">
+          <div class="section-num">04</div>
+          <div>
+            <div class="section-title">Design & Stil</div>
+            <div class="section-desc">Wie soll die Website wirken?</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Welchen Stil bevorzugen Sie?</label>
+          <div class="check-group">
+            <label class="check-item"><input type="checkbox" name="stil" value="modern_minimalistisch"><span>Modern & minimalistisch</span></label>
+            <label class="check-item"><input type="checkbox" name="stil" value="klassisch_serioes"><span>Klassisch & seriös</span></label>
+            <label class="check-item"><input type="checkbox" name="stil" value="warm_persoenlich"><span>Warm & persönlich</span></label>
+            <label class="check-item"><input type="checkbox" name="stil" value="kreativ_verspielt"><span>Kreativ & verspielt</span></label>
+            <label class="check-item"><input type="checkbox" name="stil" value="technisch_praezise"><span>Technisch & präzise</span></label>
+            <label class="check-item"><input type="checkbox" name="stil" value="luxus_exklusiv"><span>Luxuriös & exklusiv</span></label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Farbpräferenz</label>
+          <input type="text" name="farben" placeholder="z. B. Dunkelblau + Weiß, Erdtöne, Schwarz/Orange …">
+        </div>
+        <div class="field">
+          <label>Logo / CI-Materialien vorhanden?</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="ci" value="ja_vorhanden"><div class="radio-item-text"><strong>Ja, vollständig vorhanden</strong><span>Logo, Farben, Schriften — ich stelle sie zur Verfügung</span></div></label>
+            <label class="radio-item"><input type="radio" name="ci" value="logo_vorhanden"><div class="radio-item-text"><strong>Nur ein Logo</strong><span>Rest soll entwickelt werden</span></div></label>
+            <label class="radio-item"><input type="radio" name="ci" value="nein"><div class="radio-item-text"><strong>Nein</strong><span>Alles muss neu entwickelt werden</span></div></label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Websites, die Ihnen gefallen <span class="hint">URLs + was Ihnen daran gefällt</span></label>
+          <textarea name="inspirationen" placeholder="https://…&#10;https://…&#10;Was gefällt Ihnen daran besonders?" rows="4"></textarea>
+        </div>
+        <div class="field">
+          <label>Websites, die Ihnen nicht gefallen <span class="hint">optional + Begründung</span></label>
+          <textarea name="nicht_gefallen" placeholder="https://…&#10;Was stört Sie daran?" rows="3"></textarea>
+        </div>
+      </div>
+
+      <!-- 5. INHALTE -->
+      <div class="form-section" data-section="5">
+        <div class="section-header">
+          <div class="section-num">05</div>
+          <div>
+            <div class="section-title">Inhalte & Seitenstruktur</div>
+            <div class="section-desc">Was soll die Website enthalten?</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Gewünschte Seiten</label>
+          <div class="check-group">
+            <label class="check-item"><input type="checkbox" name="seiten" value="startseite" checked><span>Startseite</span></label>
+            <label class="check-item"><input type="checkbox" name="seiten" value="leistungen"><span>Leistungen</span></label>
+            <label class="check-item"><input type="checkbox" name="seiten" value="ueber_mich"><span>Über mich / Team</span></label>
+            <label class="check-item"><input type="checkbox" name="seiten" value="referenzen"><span>Referenzen / Portfolio</span></label>
+            <label class="check-item"><input type="checkbox" name="seiten" value="blog"><span>Blog / News</span></label>
+            <label class="check-item"><input type="checkbox" name="seiten" value="kontakt"><span>Kontakt</span></label>
+            <label class="check-item"><input type="checkbox" name="seiten" value="preise"><span>Preise / Pakete</span></label>
+            <label class="check-item"><input type="checkbox" name="seiten" value="faq"><span>FAQ</span></label>
+            <label class="check-item"><input type="checkbox" name="seiten" value="shop"><span>Shop</span></label>
+            <label class="check-item"><input type="checkbox" name="seiten" value="termine"><span>Terminbuchung</span></label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Weitere Seiten</label>
+          <input type="text" name="seiten_sonstige" placeholder="z. B. Karriere, Presse, Galerie …">
+        </div>
+        <div class="field">
+          <label>Texte</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="texte" value="alle_vorhanden"><div class="radio-item-text"><strong>Alle Texte vorhanden</strong><span>Ich liefere fertige Texte</span></div></label>
+            <label class="radio-item"><input type="radio" name="texte" value="teilweise"><div class="radio-item-text"><strong>Teilweise vorhanden</strong><span>Manche Texte müssen noch entwickelt werden</span></div></label>
+            <label class="radio-item"><input type="radio" name="texte" value="keine"><div class="radio-item-text"><strong>Noch keine Texte</strong><span>Texterstellung soll Teil des Projekts sein</span></div></label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Bilder / Fotos</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="bilder" value="professionell"><div class="radio-item-text"><strong>Professionelle Fotos vorhanden</strong><span>Von einem Fotografen</span></div></label>
+            <label class="radio-item"><input type="radio" name="bilder" value="eigenfotos"><div class="radio-item-text"><strong>Eigene Fotos vorhanden</strong><span>Smartphone oder Amateur</span></div></label>
+            <label class="radio-item"><input type="radio" name="bilder" value="keine_stock"><div class="radio-item-text"><strong>Keine — Stock-Fotos verwenden</strong><span>Lizenzfreie Bilder werden eingeplant</span></div></label>
+            <label class="radio-item"><input type="radio" name="bilder" value="fotoshooting"><div class="radio-item-text"><strong>Fotoshooting soll organisiert werden</strong></div></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. FUNKTIONEN -->
+      <div class="form-section" data-section="6">
+        <div class="section-header">
+          <div class="section-num">06</div>
+          <div>
+            <div class="section-title">Gewünschte Funktionen</div>
+            <div class="section-desc">Was soll die Website können?</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Benötigte Funktionen</label>
+          <div class="check-group">
+            <label class="check-item"><input type="checkbox" name="funktionen" value="kontaktformular"><span>Kontaktformular</span></label>
+            <label class="check-item"><input type="checkbox" name="funktionen" value="terminbuchung"><span>Terminbuchung</span></label>
+            <label class="check-item"><input type="checkbox" name="funktionen" value="newsletter"><span>Newsletter-Anmeldung</span></label>
+            <label class="check-item"><input type="checkbox" name="funktionen" value="blog"><span>Blog / News</span></label>
+            <label class="check-item"><input type="checkbox" name="funktionen" value="shop"><span>Online-Shop</span></label>
+            <label class="check-item"><input type="checkbox" name="funktionen" value="galerie"><span>Bild-Galerie</span></label>
+            <label class="check-item"><input type="checkbox" name="funktionen" value="mehrsprachig"><span>Mehrsprachigkeit</span></label>
+            <label class="check-item"><input type="checkbox" name="funktionen" value="google_maps"><span>Karte / Anfahrt</span></label>
+            <label class="check-item"><input type="checkbox" name="funktionen" value="bewertungen"><span>Kundenbewertungen</span></label>
+            <label class="check-item"><input type="checkbox" name="funktionen" value="mitgliederbereich"><span>Mitgliederbereich</span></label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Weitere Anforderungen</label>
+          <textarea name="funktionen_sonstige" placeholder="Was fehlt in der Liste?" rows="2"></textarea>
+        </div>
+      </div>
+
+      <!-- 7. TECHNIK -->
+      <div class="form-section" data-section="7">
+        <div class="section-header">
+          <div class="section-num">07</div>
+          <div>
+            <div class="section-title">Technik & Domain</div>
+            <div class="section-desc">Was ist bereits vorhanden?</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Domain</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="domain" value="ja"><div class="radio-item-text"><strong>Bereits registriert</strong></div></label>
+            <label class="radio-item"><input type="radio" name="domain" value="nein_idee"><div class="radio-item-text"><strong>Nein, aber Wunsch-Domain bekannt</strong></div></label>
+            <label class="radio-item"><input type="radio" name="domain" value="nein_unklar"><div class="radio-item-text"><strong>Noch unklar</strong><span>Unterstützung gewünscht</span></div></label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Domain-Name <span class="hint">falls bekannt</span></label>
+          <input type="text" name="domain_name" placeholder="z. B. mein-unternehmen.de">
+        </div>
+        <div class="field">
+          <label>Hosting</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="hosting" value="ja"><div class="radio-item-text"><strong>Vorhanden</strong><span>Bitte Anbieter unten nennen</span></div></label>
+            <label class="radio-item"><input type="radio" name="hosting" value="nein"><div class="radio-item-text"><strong>Nein</strong><span>Wird als Teil des Projekts eingerichtet</span></div></label>
+            <label class="radio-item"><input type="radio" name="hosting" value="weiss_nicht"><div class="radio-item-text"><strong>Weiß ich nicht</strong><span>Beratung gewünscht</span></div></label>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Hosting-Anbieter <span class="hint">falls bekannt</span></label>
+            <input type="text" name="hosting_anbieter" placeholder="z. B. All-inkl, Strato, IONOS …">
+          </div>
+          <div class="field">
+            <label>E-Mail für Kontaktanfragen</label>
+            <input type="email" name="kontakt_email" placeholder="ihre@email.de">
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. PROJEKT -->
+      <div class="form-section" data-section="8">
+        <div class="section-header">
+          <div class="section-num">08</div>
+          <div>
+            <div class="section-title">Zeitplan, Budget & Wettbewerber</div>
+            <div class="section-desc">Rahmenbedingungen für die Planung</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Gewünschter Go-Live</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="timeline" value="so_schnell_wie_moeglich"><div class="radio-item-text"><strong>So schnell wie möglich</strong></div></label>
+            <label class="radio-item"><input type="radio" name="timeline" value="1_monat"><div class="radio-item-text"><strong>Innerhalb eines Monats</strong></div></label>
+            <label class="radio-item"><input type="radio" name="timeline" value="2_3_monate"><div class="radio-item-text"><strong>In 2–3 Monaten</strong></div></label>
+            <label class="radio-item"><input type="radio" name="timeline" value="termin"><div class="radio-item-text"><strong>Fester Termin</strong><span>Bitte unten angeben</span></div></label>
+            <label class="radio-item"><input type="radio" name="timeline" value="flexibel"><div class="radio-item-text"><strong>Flexibel</strong></div></label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Go-Live-Datum <span class="hint">falls bekannt</span></label>
+          <input type="date" name="go_live_datum" style="color-scheme:dark">
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="field">
+          <label>Budgetrahmen</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="budget" value="bis_1500"><div class="radio-item-text"><strong>Bis 1.500 €</strong><span>One-Pager / Landingpage</span></div></label>
+            <label class="radio-item"><input type="radio" name="budget" value="1500_3000"><div class="radio-item-text"><strong>1.500 – 3.000 €</strong><span>Kleine Website mit 4–6 Seiten</span></div></label>
+            <label class="radio-item"><input type="radio" name="budget" value="3000_6000"><div class="radio-item-text"><strong>3.000 – 6.000 €</strong><span>Professionelle Website mit allen Funktionen</span></div></label>
+            <label class="radio-item"><input type="radio" name="budget" value="6000_plus"><div class="radio-item-text"><strong>Über 6.000 €</strong><span>Shop, komplexe Funktionen, größeres Projekt</span></div></label>
+            <label class="radio-item"><input type="radio" name="budget" value="offen"><div class="radio-item-text"><strong>Noch offen</strong><span>Erstmal Angebot abwarten</span></div></label>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="field">
+          <label>Wettbewerber <span class="hint">3–5 Mitbewerber-URLs</span></label>
+          <textarea name="wettbewerber" placeholder="https://…&#10;https://…&#10;Was machen diese besser? Was schlechter?" rows="4"></textarea>
+        </div>
+        <div class="field">
+          <label>Prioritäten & besondere Wünsche</label>
+          <textarea name="wichtig" placeholder="Was ist Ihnen beim Projekt besonders wichtig? Bedenken, Anforderungen, Prioritäten …" rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label>Sonstiges <span class="hint">optional</span></label>
+          <textarea name="sonstiges" placeholder="Alles was oben nicht Platz hatte …" rows="2"></textarea>
+        </div>
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="submit-section">
+        <p>Fertig ausgefüllt? Klicken Sie auf „Absenden" — ich melde mich schnellstmöglich bei Ihnen.</p>
+        <div class="btn-row">
+          <button type="button" class="btn" onclick="submitForm()">Fragebogen absenden →</button>
+          <button type="button" class="btn btn-ghost" onclick="window.print()">Drucken / PDF</button>
+        </div>
+        <div class="success-msg" id="successMsg">
+          Vielen Dank — Ihr E-Mail-Programm sollte s
