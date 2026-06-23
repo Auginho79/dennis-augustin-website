@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /projektstart
+Disallow: /impressum
+Disallow: /datenschutz
+Disallow: /kunden-abfragebogen
+
+Sitemap: https://dennis-augustin.com/sitemap.xml
