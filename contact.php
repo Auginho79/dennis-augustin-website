@@ -5,19 +5,6 @@
  * Benötigt PHPMailer: composer require phpmailer/phpmailer
  */
 
-// DEBUG – nach Test wieder entfernen
-error_reporting(E_ALL);
-ini_set('display_errors', 0);
-ini_set('log_errors', 1);
-set_exception_handler(function($e) {
-    http_response_code(500);
-    header('Content-Type: application/json; charset=utf-8');
-    exit(json_encode(['ok' => false, 'debug' => $e->getMessage(), 'file' => $e->getFile(), 'line' => $e->getLine()]));
-});
-set_error_handler(function($errno, $errstr, $errfile, $errline) {
-    throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
-});
-
 header('Content-Type: application/json; charset=utf-8');
 
 // Nur POST zulassen
