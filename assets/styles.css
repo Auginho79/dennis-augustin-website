@@ -1,6 +1,6 @@
 /* =========================================================
-   Dennis Augustin  zentrales Stylesheet
-   Eine Quelle der Wahrheit für alle Seiten (durchgängige CI)
+   Dennis Augustin â€“ zentrales Stylesheet
+   Eine Quelle der Wahrheit fÃ¼r alle Seiten (durchgÃ¤ngige CI)
    ========================================================= */
 
 /* ---------- Self-hosted Fonts (DSGVO-konform) ---------- */
@@ -125,7 +125,7 @@ h1 em{font-style:italic;color:var(--accent)}
 .stat .lab{color:var(--muted);font-size:14px;margin-top:8px;max-width:20ch}
 .stat .num span{color:var(--accent)}
 
-/* ---------- Section-Köpfe ---------- */
+/* ---------- Section-KÃ¶pfe ---------- */
 section{position:relative}
 .sec-head{margin-bottom:64px;max-width:62ch}
 .sec-head .eyebrow{margin-bottom:18px}
@@ -134,7 +134,7 @@ section{position:relative}
 .sec-head p{margin-top:20px;color:var(--paper-dim);font-weight:300;font-size:18px;max-width:54ch}
 
 /* ---------- Leistungs-Karten ---------- */
-.leistunge{padding:130px 0}
+.leistungen{padding:130px 0}
 .grid-serv{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 .serv{position:relative;border:1px solid var(--line);border-radius:20px;padding:40px 38px;background:linear-gradient(180deg,rgba(255,255,255,.025),transparent);transition:transform .45s var(--ease),border-color .45s,background .45s;overflow:hidden}
 .serv::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .45s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(255,90,48,.12),transparent 60%)}
@@ -148,7 +148,7 @@ section{position:relative}
 .serv .more span{color:var(--accent);transition:transform .3s}
 .serv:hover .more span{transform:translateX(5px)}
 
-/* ---------- Zwei Säulen (Startseite) ---------- */
+/* ---------- Zwei SÃ¤ulen (Startseite) ---------- */
 .pillars-sec{padding:130px 0}
 .pillars{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .pillar{position:relative;border:1px solid var(--line);border-radius:24px;padding:48px 44px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.03),transparent);transition:transform .45s var(--ease),border-color .45s;display:flex;flex-direction:column}
@@ -156,12 +156,12 @@ section{position:relative}
 .pillar:hover{transform:translateY(-6px);border-color:rgba(255,90,48,.4)}
 .pillar:hover::before{opacity:1}
 .pillar .plabel{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:22px}
-.pillar h3{font-family:"Fraunces",serif;font-weight:400;font-size:clamp(28px,3.4vw,3px);letter-spacing:-.02em;line-height:1.08;margin-bottom:16px}
+.pillar h3{font-family:"Fraunces",serif;font-weight:400;font-size:clamp(28px,3.4vw,38px);letter-spacing:-.02em;line-height:1.08;margin-bottom:16px}
 .pillar>p{color:var(--paper-dim);font-weight:300;font-size:16px;margin-bottom:28px}
 .pillar ul{list-style:none;display:flex;flex-direction:column;gap:13px;margin-bottom:36px}
 .pillar ul li{display:flex;align-items:center;gap:13px;color:var(--paper);font-size:15.5px;font-weight:300}
 .pillar ul li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none}
-.pillar .more{margin-top:auto;ont-size:15px;display:inline-flex;align-items:center;gap:9px;color:var(--paper)}
+.pillar .more{margin-top:auto;font-size:15px;display:inline-flex;align-items:center;gap:9px;color:var(--paper)}
 .pillar .more span{color:var(--accent);transition:transform .3s}
 .pillar:hover .more span{transform:translateX(5px)}
 
@@ -169,14 +169,13 @@ section{position:relative}
 .bridge{padding:120px 0;border-top:1px solid var(--line);text-align:center}
 .bridge h2{font-family:"Fraunces",serif;font-weight:400;font-size:clamp(30px,4.6vw,54px);letter-spacing:-.02em;line-height:1.08;max-width:22ch;margin:0 auto}
 .bridge h2 em{font-style:italic;color:var(--accent)}
-.bridge p{margin:26px auto 0;max-width:58ch=color:var(--paper-dim);font-weight:300;font-size:18px}
+.bridge p{margin:26px auto 0;max-width:58ch;color:var(--paper-dim);font-weight:300;font-size:18px}
 
-/* ---------- Über mich ---------- */
+/* ---------- Ãœber mich ---------- */
 .about{padding:130px 0;border-top:1px solid var(--line)}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
 .about-portrait{position:relative;aspect-ratio:4/5;border-radius:22px;overflow:hidden;background:linear-gradient(145deg,#1d1d22,#0e0e11);border:1px solid var(--line);display:flex;align-items:flex-end;justify-content:center}
-.about-portrait .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;text-align:center;letter-spacing:.04em;padding:20px}
-.about-portrait .big-da{font-family:"Fraunces",serif;font-size:clamp(120px,22vw,240px);font-weight:300;color:rgba(244,240,232,.05);line-height:.8;user-select:none}
+.about-portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;}
 .about h2{font-family:"Fraunces",serif;font-weight:400;font-size:clamp(30px,4vw,46px);letter-spacing:-.02em;line-height:1.1}
 .about h2 em{font-style:italic;color:var(--accent)}
 .about p{margin-top:24px;color:var(--paper-dim);font-weight:300;font-size:17px}
@@ -261,7 +260,7 @@ footer p.tag{color:var(--muted);font-size:14px;font-weight:300;max-width:30ch}
 /* ---------- Reveal ---------- */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .reveal.in{opacity:1;transform:none}
-.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s0}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
 @media(prefers-reduced-motion:reduce){
   .reveal{opacity:1;transform:none;transition:none}
   html{scroll-behavior:auto}
