@@ -6,6 +6,9 @@
 <title>Content &amp; Texte – verständlich und suchstark | Dennis Augustin</title>
 <meta name="description" content="Texte, die verstanden werden und ranken: SEO-Texte, Webseiten-Content, Blog &amp; Ratgeber sowie eine Content-Strategie, die zu Ihren Zielen passt.">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
@@ -46,7 +49,7 @@
         <p>Vom einzelnen Text bis zur durchdachten Content-Strategie – passend zu Ihrem Ziel.</p>
       </div>
       <div class="grid-serv">
-        <div class="serv reveal d1"><span class="idx">01</span><h3>SEO-Texte</h3><p>Inhalte, die zu echten Suchanfragen passen und sauber strukturiert sind – damit sie gefunden werden und øberzeugen.</p></div>
+        <div class="serv reveal d1"><span class="idx">01</span><h3>SEO-Texte</h3><p>Inhalte, die zu echten Suchanfragen passen und sauber strukturiert sind – damit sie gefunden werden und überzeugen.</p></div>
         <div class="serv reveal d2"><span class="idx">02</span><h3>Webseiten-Texte</h3><p>Klare Startseiten, Leistungs- und Über-uns-Texte, die Besucher führen und zur Anfrage bewegen.</p></div>
         <div class="serv reveal d3"><span class="idx">03</span><h3>Blog &amp; Ratgeber</h3><p>Themen, die Ihre Kompetenz zeigen, Vertrauen aufbauen und langfristig Traffic bringen.</p></div>
         <div class="serv reveal d4"><span class="idx">04</span><h3>Content-Strategie</h3><p>Welche Inhalte wann und wofür? Ich gebe Ihrem Content einen roten Faden statt zufälliger Einzelstücke.</p></div>
@@ -75,9 +78,11 @@
         <p class="lead">Schreiben Sie mir unverbindlich – ich melde mich schnellstmöglich zurück.</p>
         <div class="contact-meta">
           <a href="mailto:mail@dennis-augustin.com"><span class="ic">✉</span> mail@dennis-augustin.com</a>
+          <a href="https://calendly.com/dennisaugustin/kostenloses-erstgespraech-30-minuten"><span class="ic">◷</span> Online-Termin buchen (30 Min.)</a>
         </div>
       </div>
-      <form class="reveal d1" action="#" method="post" onsubmit="return false;">
+      <form class="reveal d1" action="contact.php" method="post" data-contact>
+        <input type="text" name="_hp" style="display:none" tabindex="-1" autocomplete="off">
         <div class="row2">
           <div class="field"><label for="n">Name</label><input id="n" name="name" type="text" autocomplete="name" placeholder="Ihr Name"></div>
           <div class="field"><label for="e">E-Mail</label><input id="e" name="email" type="email" autocomplete="email" placeholder="name@beispiel.de"></div>

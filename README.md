@@ -17,7 +17,7 @@ dennis-augustin-website/
 ├── datenschutz.html            Rechtstext-Vorlage (noindex)
 └── assets/
     ├── styles.css              Zentrales Stylesheet (eine Quelle für die ganze CI)
-    ├── main.js                 Header-Scroll, Menü, Animationen, aktiver Menøpunkt
+    ├── main.js                 Header-Scroll, Menü, Animationen, aktiver Menüpunkt
     └── favicon.svg             Favicon (Logo-Punkt)
 ```
 

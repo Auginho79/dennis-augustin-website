@@ -1,0 +1,9 @@
+# Zugangsdaten – NIEMALS in Git einchecken
+config.php
+
+# PHP-Abhängigkeiten
+vendor/
+
+# System-Dateien
+.DS_Store
+Thumbs.db
