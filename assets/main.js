@@ -52,4 +52,55 @@
     var href = a.getAttribute('href');
     if (href === page) a.classList.add('active');
   });
+
+  // Kontaktformular – AJAX-Handling
+  document.querySelectorAll('form[data-contact]').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn  = form.querySelector('button[type="submit"]');
+      var orig = btn.textContent;
+
+      btn.disabled    = true;
+      btn.textContent = 'Wird gesendet …';
+
+      fetch('contact.php', {
+        method:  'POST',
+        body:    new FormData(form),
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+      })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.ok) {
+          // Formular durch Erfolgsmeldung ersetzen
+          form.innerHTML =
+            '<div class="form-success">' +
+            '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">' +
+            '<circle cx="24" cy="24" r="24" fill="#ff5a30"/>' +
+            '<path d="M14 24l8 8 12-14" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+            '</svg>' +
+            '<h3>Ihre Nachricht ist angekommen.</h3>' +
+            '<p>Vielen Dank – ich melde mich schnellstmöglich bei Ihnen zurück.</p>' +
+            '</div>';
+        } else {
+          btn.disabled    = false;
+          btn.textContent = orig;
+          showFormError(form, data.msg || 'Unbekannter Fehler.');
+        }
+      })
+      .catch(function () {
+        btn.disabled    = false;
+        btn.textContent = orig;
+        showFormError(form, 'Verbindungsfehler. Bitte direkt an mail@dennis-augustin.com schreiben.');
+      });
+    });
+  });
+
+  function showFormError(form, msg) {
+    var existing = form.querySelector('.form-error');
+    if (existing) existing.remove();
+    var el = document.createElement('p');
+    el.className   = 'form-error';
+    el.textContent = msg;
+    form.appendChild(el);
+  }
 })();
