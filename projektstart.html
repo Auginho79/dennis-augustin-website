@@ -581,26 +581,52 @@
     <!-- HERO -->
     <div class="page-hero">
       <div class="eyebrow"><span class="bar"></span>Projektstart</div>
-      <h1>Website-<em>Briefing</em></h1>
+      <h1>Projekt-<em>Briefing</em></h1>
       <p>
-        Damit Ihre neue Website von Anfang an in die richtige Richtung geht,
+        Damit Ihr Projekt von Anfang an in die richtige Richtung geht,
         bitte ich Sie, diese Fragen vorab auszufüllen. Vertraulich —
         Fragen gerne an <a href="mailto:mail@dennis-augustin.com">mail@dennis-augustin.com</a>
       </p>
     </div>
 
-    <!-- PROGRESS -->
-    <div class="progress-wrap">
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-      <div class="progress-label" id="progressLabel">0 von 8 Abschnitten ausgefüllt</div>
-    </div>
-
     <form id="fragebogen" novalidate>
 
+      <!-- 0. PROJEKT-TYP -->
+      <div class="form-section type-select">
+        <div class="section-header">
+          <div class="section-num">—</div>
+          <div>
+            <div class="section-title">Um welches Projekt geht es?</div>
+            <div class="section-desc">Wählen Sie aus, dann zeige ich Ihnen die passenden Fragen</div>
+          </div>
+        </div>
+
+        <div class="radio-group">
+          <label class="radio-item">
+            <input type="radio" name="projekt_typ" value="website" onchange="setType('website')">
+            <div class="radio-item-text"><strong>Website-Projekt</strong><span>Neubau, Relaunch oder Erweiterung Ihrer Website</span></div>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="projekt_typ" value="marketing" onchange="setType('marketing')">
+            <div class="radio-item-text"><strong>Marketing-Projekt</strong><span>Sichtbarkeit, Leads, Kampagnen, Kanäle</span></div>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="projekt_typ" value="komplett" onchange="setType('komplett')">
+            <div class="radio-item-text"><strong>Komplett-Projekt</strong><span>Website und Marketing zusammen</span></div>
+          </label>
+        </div>
+      </div>
+
+      <!-- PROGRESS -->
+      <div class="progress-wrap">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-label" id="progressLabel">Bitte zuerst Projekt-Typ auswählen</div>
+      </div>
+
       <!-- 1. KONTAKT -->
-      <div class="form-section" data-section="1">
+      <div class="form-section" data-section="1" data-type="shared">
         <div class="section-header">
           <div class="section-num">01</div>
           <div>
@@ -636,7 +662,7 @@
       </div>
 
       <!-- 2. ANGEBOT -->
-      <div class="form-section" data-section="2">
+      <div class="form-section" data-section="2" data-type="shared">
         <div class="section-header">
           <div class="section-num">02</div>
           <div>
@@ -684,7 +710,7 @@
       </div>
 
       <!-- 3. ZIELGRUPPE -->
-      <div class="form-section" data-section="3">
+      <div class="form-section" data-section="3" data-type="shared">
         <div class="section-header">
           <div class="section-num">03</div>
           <div>
@@ -713,7 +739,7 @@
       </div>
 
       <!-- 4. DESIGN -->
-      <div class="form-section" data-section="4">
+      <div class="form-section" data-section="4" data-type="website">
         <div class="section-header">
           <div class="section-num">04</div>
           <div>
@@ -756,7 +782,7 @@
       </div>
 
       <!-- 5. INHALTE -->
-      <div class="form-section" data-section="5">
+      <div class="form-section" data-section="5" data-type="website">
         <div class="section-header">
           <div class="section-num">05</div>
           <div>
@@ -804,7 +830,7 @@
       </div>
 
       <!-- 6. FUNKTIONEN -->
-      <div class="form-section" data-section="6">
+      <div class="form-section" data-section="6" data-type="website">
         <div class="section-header">
           <div class="section-num">06</div>
           <div>
@@ -835,7 +861,7 @@
       </div>
 
       <!-- 7. TECHNIK -->
-      <div class="form-section" data-section="7">
+      <div class="form-section" data-section="7" data-type="website">
         <div class="section-header">
           <div class="section-num">07</div>
           <div>
@@ -876,12 +902,12 @@
         </div>
       </div>
 
-      <!-- 8. PROJEKT -->
-      <div class="form-section" data-section="8">
+      <!-- 8. ZEITPLAN & BUDGET (WEBSITE) -->
+      <div class="form-section" data-section="8" data-type="website">
         <div class="section-header">
           <div class="section-num">08</div>
           <div>
-            <div class="section-title">Zeitplan, Budget & Wettbewerber</div>
+            <div class="section-title">Zeitplan & Budget</div>
             <div class="section-desc">Rahmenbedingungen für die Planung</div>
           </div>
         </div>
@@ -913,8 +939,235 @@
             <label class="radio-item"><input type="radio" name="budget" value="offen"><div class="radio-item-text"><strong>Noch offen</strong><span>Erstmal Angebot abwarten</span></div></label>
           </div>
         </div>
+      </div>
+
+      <!-- M1. KANÄLE & AKTIVITÄTEN -->
+      <div class="form-section" data-section="m1" data-type="marketing">
+        <div class="section-header">
+          <div class="section-num">09</div>
+          <div>
+            <div class="section-title">Bestehende Kanäle & Aktivitäten</div>
+            <div class="section-desc">Was nutzen Sie heute schon?</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Ist die bestehende Website für Marketing (SEO, Leads) geeignet?</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="website_marketing_tauglich" value="passt"><div class="radio-item-text"><strong>Ja, passt</strong></div></label>
+            <label class="radio-item"><input type="radio" name="website_marketing_tauglich" value="anpassung_noetig"><div class="radio-item-text"><strong>Muss angepasst werden</strong><span>z. B. Leistungsseiten, SEO-Struktur, Tracking</span></div></label>
+            <label class="radio-item"><input type="radio" name="website_marketing_tauglich" value="unklar"><div class="radio-item-text"><strong>Weiß ich noch nicht</strong></div></label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Welche Anpassungen vermutlich nötig sind <span class="hint">optional</span></label>
+          <textarea name="website_anpassung_details" placeholder="z. B. eigene Leistungsseiten statt One-Pager, lokale Keywords, Ladezeit, Conversion-Tracking …" rows="2"></textarea>
+        </div>
 
         <div class="divider"></div>
+
+        <div class="field">
+          <label>Welche Online-Kanäle sind aktiv?</label>
+          <div class="check-group">
+            <label class="check-item"><input type="checkbox" name="kanaele_online" value="google_business"><span>Google Business Profile</span></label>
+            <label class="check-item"><input type="checkbox" name="kanaele_online" value="facebook"><span>Facebook</span></label>
+            <label class="check-item"><input type="checkbox" name="kanaele_online" value="instagram"><span>Instagram</span></label>
+            <label class="check-item"><input type="checkbox" name="kanaele_online" value="linkedin"><span>LinkedIn</span></label>
+            <label class="check-item"><input type="checkbox" name="kanaele_online" value="google_ads"><span>Google Ads</span></label>
+            <label class="check-item"><input type="checkbox" name="kanaele_online" value="sonstige_online"><span>Sonstige</span></label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Google Business Profile <span class="hint">falls vorhanden: wer hat Zugriff?</span></label>
+          <input type="text" name="gbp_zugriff" placeholder="z. B. Ich selbst, Mitarbeiter, unbekannt …">
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="field">
+          <label>Gibt es Offline-Marketing?</label>
+          <div class="check-group">
+            <label class="check-item"><input type="checkbox" name="kanaele_offline" value="flyer"><span>Flyerversand / Verteilung</span></label>
+            <label class="check-item"><input type="checkbox" name="kanaele_offline" value="print"><span>Print-Anzeigen</span></label>
+            <label class="check-item"><input type="checkbox" name="kanaele_offline" value="messen"><span>Messen / Veranstaltungen</span></label>
+            <label class="check-item"><input type="checkbox" name="kanaele_offline" value="sonstige_offline"><span>Sonstiges</span></label>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="field">
+          <label>Wird E-Mail-Marketing betrieben?</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="email_marketing" value="ja_mit_einwilligung"><div class="radio-item-text"><strong>Ja</strong><span>Bestehender Mailverteiler mit Einwilligung für Mailings</span></div></label>
+            <label class="radio-item"><input type="radio" name="email_marketing" value="ja_ohne_einwilligung"><div class="radio-item-text"><strong>Ja</strong><span>Verteiler vorhanden, Einwilligung unklar</span></div></label>
+            <label class="radio-item"><input type="radio" name="email_marketing" value="nein"><div class="radio-item-text"><strong>Nein</strong><span>Noch kein E-Mail-Marketing</span></div></label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Bestandskunden <span class="hint">ungefähre Anzahl</span></label>
+          <input type="text" name="bestandskunden_anzahl" placeholder="z. B. ca. 50">
+        </div>
+      </div>
+
+      <!-- M2. ZIELE -->
+      <div class="form-section" data-section="m2" data-type="marketing">
+        <div class="section-header">
+          <div class="section-num">10</div>
+          <div>
+            <div class="section-title">Ziele & Erfolgskriterien</div>
+            <div class="section-desc">Was soll das Marketing konkret erreichen?</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Welcher Bereich/welche Leistung soll wachsen? <span class="req">*</span></label>
+          <textarea name="marketing_ziel_bereich" placeholder="Welches Angebot oder welcher Geschäftsbereich soll im Fokus stehen?" rows="2"></textarea>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Wie viele neue Kunden/Monat wären ein Erfolg?</label>
+            <input type="text" name="marketing_ziel_menge" placeholder="z. B. 5 Neukunden/Monat">
+          </div>
+          <div class="field">
+            <label>Wert eines Abschlusses/einer Neukundengewinnung</label>
+            <input type="text" name="marketing_ziel_wert" placeholder="z. B. durchschnittlicher Auftragswert, Provision …">
+          </div>
+        </div>
+      </div>
+
+      <!-- M3. PROZESSE -->
+      <div class="form-section" data-section="m3" data-type="marketing">
+        <div class="section-header">
+          <div class="section-num">11</div>
+          <div>
+            <div class="section-title">Anfrage-Prozess & Reaktionszeit</div>
+            <div class="section-desc">Wie werden Anfragen heute bearbeitet?</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Wer nimmt Anfragen entgegen, wie schnell wird zurückgerufen?</label>
+          <textarea name="prozess_anfragen" placeholder="z. B. Ich selbst, meist am selben Tag …" rows="2"></textarea>
+        </div>
+        <div class="field">
+          <label>Gibt es ein CRM oder landen Anfragen im Mail-Postfach?</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="prozess_crm" value="crm"><div class="radio-item-text"><strong>Ja, ein CRM ist im Einsatz</strong></div></label>
+            <label class="radio-item"><input type="radio" name="prozess_crm" value="mail_postfach"><div class="radio-item-text"><strong>Nein</strong><span>Anfragen landen im Mail-Postfach</span></div></label>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Zusagbare Reaktionszeit</label>
+            <input type="text" name="prozess_reaktionszeit" placeholder="z. B. werktags max. 4h">
+          </div>
+          <div class="field">
+            <label>Lead-Benachrichtigung</label>
+            <div class="radio-group">
+              <label class="radio-item"><input type="radio" name="prozess_benachrichtigung" value="email"><div class="radio-item-text"><strong>E-Mail</strong></div></label>
+              <label class="radio-item"><input type="radio" name="prozess_benachrichtigung" value="sms_push"><div class="radio-item-text"><strong>SMS / Push</strong></div></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- M4. WERBEBUDGET -->
+      <div class="form-section" data-section="m4" data-type="marketing">
+        <div class="section-header">
+          <div class="section-num">12</div>
+          <div>
+            <div class="section-title">Werbebudget & Zeithorizont</div>
+            <div class="section-desc">Rahmenbedingungen für die Planung</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Monatliches Werbe-/Marketingbudget</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="werbebudget" value="bis_300"><div class="radio-item-text"><strong>Bis 300 €/Monat</strong></div></label>
+            <label class="radio-item"><input type="radio" name="werbebudget" value="300_1000"><div class="radio-item-text"><strong>300 – 1.000 €/Monat</strong></div></label>
+            <label class="radio-item"><input type="radio" name="werbebudget" value="1000_2500"><div class="radio-item-text"><strong>1.000 – 2.500 €/Monat</strong></div></label>
+            <label class="radio-item"><input type="radio" name="werbebudget" value="2500_plus"><div class="radio-item-text"><strong>Über 2.500 €/Monat</strong></div></label>
+            <label class="radio-item"><input type="radio" name="werbebudget" value="offen"><div class="radio-item-text"><strong>Noch offen</strong><span>Erstmal Angebot abwarten</span></div></label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Zeithorizont</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="marketing_zeithorizont" value="schnell_ads"><div class="radio-item-text"><strong>Schnelle Ergebnisse</strong><span>eher Ads</span></div></label>
+            <label class="radio-item"><input type="radio" name="marketing_zeithorizont" value="nachhaltig_seo"><div class="radio-item-text"><strong>Nachhaltig</strong><span>eher SEO</span></div></label>
+            <label class="radio-item"><input type="radio" name="marketing_zeithorizont" value="beides"><div class="radio-item-text"><strong>Beides</strong></div></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- M5. VERTRIEBS-HISTORIE -->
+      <div class="form-section" data-section="m5" data-type="marketing">
+        <div class="section-header">
+          <div class="section-num">13</div>
+          <div>
+            <div class="section-title">Vertriebs-Historie</div>
+            <div class="section-desc">Woher kamen bisherige Kunden?</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Woher kamen die letzten Neukunden/Abschlüsse?</label>
+          <textarea name="vertrieb_herkunft" placeholder="z. B. Empfehlungen, Google, Bestandskunden …" rows="2"></textarea>
+        </div>
+        <div class="field">
+          <label>Welche Kundentypen bringen am meisten Freude/Marge?</label>
+          <textarea name="vertrieb_kundentypen" placeholder="Beschreibung der profitabelsten/angenehmsten Kunden" rows="2"></textarea>
+        </div>
+      </div>
+
+      <!-- M6. TOOLS & FUNNEL -->
+      <div class="form-section" data-section="m6" data-type="marketing">
+        <div class="section-header">
+          <div class="section-num">14</div>
+          <div>
+            <div class="section-title">Bestehende Tools & Funnel</div>
+            <div class="section-desc">Was ist technisch schon im Einsatz?</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Gibt es bereits einen Funnel/eine Landingpage (z. B. systeme.io)?</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="funnel_vorhanden" value="ja"><div class="radio-item-text"><strong>Ja</strong></div></label>
+            <label class="radio-item"><input type="radio" name="funnel_vorhanden" value="nein"><div class="radio-item-text"><strong>Nein</strong></div></label>
+            <label class="radio-item"><input type="radio" name="funnel_vorhanden" value="weiss_nicht"><div class="radio-item-text"><strong>Weiß ich nicht</strong></div></label>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Tool/Anbieter <span class="hint">falls bekannt</span></label>
+            <input type="text" name="funnel_tool" placeholder="z. B. systeme.io">
+          </div>
+          <div class="field">
+            <label>Wer hat Zugriff, welcher Tarif?</label>
+            <input type="text" name="funnel_zugriff" placeholder="z. B. Ich selbst, Tarif unbekannt …">
+          </div>
+        </div>
+        <div class="field">
+          <label>AV-Vertrag & DSGVO auf dem Funnel aktuell?</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="funnel_dsgvo" value="ja"><div class="radio-item-text"><strong>Ja</strong></div></label>
+            <label class="radio-item"><input type="radio" name="funnel_dsgvo" value="nein"><div class="radio-item-text"><strong>Nein / unklar</strong></div></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. WETTBEWERBER & PRIORITÄTEN -->
+      <div class="form-section" data-section="9" data-type="shared">
+        <div class="section-header">
+          <div class="section-num">09</div>
+          <div>
+            <div class="section-title">Wettbewerber & Prioritäten</div>
+            <div class="section-desc">Was sollte ich sonst noch wissen?</div>
+          </div>
+        </div>
 
         <div class="field">
           <label>Wettbewerber <span class="hint">3–5 Mitbewerber-URLs</span></label>
@@ -938,4 +1191,133 @@
           <button type="button" class="btn btn-ghost" onclick="window.print()">Drucken / PDF</button>
         </div>
         <div class="success-msg" id="successMsg">
-          Vielen Dank — Ihr E-Mail-Programm sollte s
+          Vielen Dank — Ihr E-Mail-Programm sollte sich jetzt mit allen Antworten öffnen.
+          Falls nicht, schicken Sie den ausgefüllten Fragebogen einfach an
+          <strong>mail@dennis-augustin.com</strong>.
+        </div>
+      </div>
+
+    </form>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-inner">
+      <small>© 2026 Dennis Augustin</small>
+      <div class="footer-links">
+        <a href="/impressum">Impressum</a>
+        <a href="/datenschutz">Datenschutz</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Projekt-Typ: zeigt/versteckt die passenden Abschnitte
+  let currentType = null;
+
+  function visibleSections() {
+    return Array.from(document.querySelectorAll('.form-section:not(.type-select)'))
+      .filter(s => s.style.display !== 'none');
+  }
+
+  function renumberSections() {
+    visibleSections().forEach((s, i) => {
+      s.querySelector('.section-num').textContent = String(i + 1).padStart(2, '0');
+    });
+  }
+
+  function setType(type) {
+    currentType = type;
+    document.querySelectorAll('.form-section[data-type="website"], .form-section[data-type="marketing"]').forEach(s => {
+      const isActive = type === 'komplett' || s.dataset.type === type;
+      s.style.display = isActive ? '' : 'none';
+      if (!isActive) s.querySelectorAll('input, textarea, select').forEach(i => {
+        if (i.type === 'checkbox' || i.type === 'radio') i.checked = false; else i.value = '';
+      });
+    });
+    renumberSections();
+    updateProgress();
+  }
+
+  // Progress
+  function updateProgress() {
+    const sections = visibleSections();
+    let filled = 0;
+    sections.forEach(s => {
+      const inputs = s.querySelectorAll('input, textarea, select');
+      let has = false;
+      inputs.forEach(i => {
+        if ((i.type === 'checkbox' || i.type === 'radio') && i.checked) has = true;
+        else if (i.type !== 'checkbox' && i.type !== 'radio' && i.value.trim()) has = true;
+      });
+      if (has) filled++;
+    });
+    const pct = sections.length ? Math.round((filled / sections.length) * 100) : 0;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = currentType
+      ? filled + ' von ' + sections.length + ' Abschnitten ausgefüllt'
+      : 'Bitte zuerst Projekt-Typ auswählen';
+  }
+
+  // Beim Laden: alle typ-spezifischen Abschnitte erstmal ausblenden
+  document.querySelectorAll('.form-section[data-type="website"], .form-section[data-type="marketing"]').forEach(s => {
+    s.style.display = 'none';
+  });
+
+  document.getElementById('fragebogen').addEventListener('input', updateProgress);
+  document.getElementById('fragebogen').addEventListener('change', updateProgress);
+
+  // Submit → mailto
+  function submitForm() {
+    const form = document.getElementById('fragebogen');
+    const data = new FormData(form);
+
+    const labels = {
+      projekt_typ:'Projekt-Typ',
+      name:'Name', firma:'Unternehmen', email:'E-Mail', telefon:'Telefon', standort:'Standort',
+      angebot:'Angebot', usp:'Alleinstellungsmerkmal', branche:'Branche',
+      bestehende_website:'Bestehende Website', url_aktuell:'Aktuelle URL',
+      zielgruppe:'Zielgruppe', ziel_aktion:'Gewünschte Aktion', zielgruppe_ergaenzung:'Zielgruppe (Ergänzung)',
+      stil:'Designstil', farben:'Farbpräferenz', ci:'CI/Logo',
+      inspirationen:'Inspirationen', nicht_gefallen:'Nicht gefällt',
+      seiten:'Gewünschte Seiten', seiten_sonstige:'Weitere Seiten',
+      texte:'Texte', bilder:'Bilder',
+      funktionen:'Funktionen', funktionen_sonstige:'Weitere Funktionen',
+      domain:'Domain', domain_name:'Domain-Name',
+      hosting:'Hosting', hosting_anbieter:'Hosting-Anbieter', kontakt_email:'Kontakt-E-Mail',
+      timeline:'Zeitplan', go_live_datum:'Go-Live-Datum', budget:'Budget',
+      website_marketing_tauglich:'Website marketing-tauglich?', website_anpassung_details:'Nötige Website-Anpassungen',
+      kanaele_online:'Aktive Online-Kanäle', gbp_zugriff:'Google Business Profile Zugriff',
+      kanaele_offline:'Offline-Marketing', email_marketing:'E-Mail-Marketing', bestandskunden_anzahl:'Anzahl Bestandskunden',
+      marketing_ziel_bereich:'Wachstumsbereich', marketing_ziel_menge:'Ziel Neukunden/Monat', marketing_ziel_wert:'Wert Neukundengewinnung',
+      prozess_anfragen:'Anfrage-Bearbeitung', prozess_crm:'CRM/Postfach', prozess_reaktionszeit:'Zusagbare Reaktionszeit', prozess_benachrichtigung:'Lead-Benachrichtigung',
+      werbebudget:'Werbebudget', marketing_zeithorizont:'Zeithorizont',
+      vertrieb_herkunft:'Herkunft letzter Neukunden', vertrieb_kundentypen:'Profitabelste Kundentypen',
+      funnel_vorhanden:'Funnel vorhanden', funnel_tool:'Funnel-Tool', funnel_zugriff:'Funnel-Zugriff', funnel_dsgvo:'AV-Vertrag/DSGVO Funnel',
+      wettbewerber:'Wettbewerber', wichtig:'Prioritäten', sonstiges:'Sonstiges'
+    };
+
+    const values = {};
+    for (const [k, v] of data.entries()) {
+      values[k] = values[k] ? values[k] + ', ' + v : v;
+    }
+
+    const titelMap = { website: 'Website-Briefing', marketing: 'Marketing-Briefing', komplett: 'Projekt-Briefing (Website + Marketing)' };
+    const briefingTitel = titelMap[currentType] || 'Projekt-Briefing';
+
+    let body = briefingTitel + '\n' + '='.repeat(36) + '\n\n';
+    for (const [key, label] of Object.entries(labels)) {
+      if (values[key]) body += label + ':\n' + values[key] + '\n\n';
+    }
+
+    const subject = encodeURIComponent(briefingTitel + ': ' + (values.name || 'Neues Projekt'));
+    window.location.href = 'mailto:mail@dennis-augustin.com?subject=' + subject + '&body=' + encodeURIComponent(body);
+    document.getElementById('successMsg').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
