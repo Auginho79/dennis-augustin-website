@@ -54,14 +54,14 @@
 }
 
 :root{
-  --ink:#0c0c0e;
-  --ink-2:#141417;
-  --paper:#f4f0e8;
-  --paper-dim:#cfc8ba;
-  --muted:#8d877c;
+  --ink:#f7f4ee;             /* heller, warmer Hintergrund */
+  --ink-2:#ffffff;           /* Karten / Felder */
+  --paper:#1b1813;           /* dunkle, warme Schrift */
+  --paper-dim:#514b40;       /* Sekundärtext */
+  --muted:#8a8377;
   --accent:#ff5a30;          /* warmes Signal-Orange */
   --accent-soft:#ffd9cc;
-  --line:rgba(244,240,232,.12);
+  --line:rgba(27,24,19,.12);
   --maxw:1180px;
   --ease:cubic-bezier(.2,.7,.2,1);
 }
@@ -93,7 +93,7 @@ header.scrolled .nav{padding:14px 0}
 .logo{font-family:"Fraunces",serif;font-size:21px;font-weight:600;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
 .logo .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block}
 .nav-links{display:flex;align-items:center;gap:34px}
-.nav-links a{font-size:14.5px;color:var(--paper-dim);transition:color .25s;position:relative}
+.nav-links a:not(.btn){font-size:14.5px;color:var(--paper-dim);transition:color .25s;position:relative}
 .nav-links a:not(.btn):hover{color:var(--paper)}
 .nav-links a:not(.btn).active{color:var(--paper)}
 .nav-links a:not(.btn)::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:1px;background:var(--accent);transition:width .3s var(--ease)}
@@ -308,3 +308,60 @@ footer p.tag{color:var(--muted);font-size:14px;font-weight:300;max-width:30ch}
   .row2{grid-template-columns:1fr}
   .hero{padding:150px 0 90px}
 }
+
+/* ---------- Blog (Übersicht) ---------- */
+.blog-list{padding:20px 0 40px}
+.blog-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.post-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:20px;padding:36px 34px;background:linear-gradient(180deg,rgba(255,255,255,.025),transparent);transition:transform .45s var(--ease),border-color .45s}
+.post-card:hover{transform:translateY(-6px);border-color:rgba(255,90,48,.4)}
+.post-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:12.5px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:18px}
+.post-meta .cat{color:var(--accent)}
+.post-card h3{font-family:"Fraunces",serif;font-weight:500;font-size:24px;letter-spacing:-.01em;line-height:1.15;margin-bottom:14px}
+.post-card>p{color:var(--paper-dim);font-weight:300;font-size:15.5px;margin-bottom:26px}
+.post-card .more{margin-top:auto;font-size:14.5px;display:inline-flex;align-items:center;gap:8px;color:var(--paper)}
+.post-card .more span{color:var(--accent);transition:transform .3s}
+.post-card:hover .more span{transform:translateX(5px)}
+@media(max-width:860px){.blog-grid{grid-template-columns:1fr}}
+
+/* ---------- Blog (Einzelbeitrag) ---------- */
+.article{padding:170px 0 40px}
+.article-head{max-width:72ch;margin-bottom:38px}
+.article-head h1{font-family:"Fraunces",serif;font-weight:400;letter-spacing:-.025em;line-height:1.05;font-size:clamp(34px,5.4vw,62px);max-width:20ch}
+.article-head h1 em{font-style:italic;color:var(--accent)}
+.article .prose{max-width:72ch}
+.article .prose h2{font-family:"Fraunces",serif;font-weight:500;font-size:26px;letter-spacing:-.01em;margin:44px 0 14px}
+.article .prose p{color:var(--paper-dim);font-weight:300;margin-bottom:16px;font-size:17px}
+.article .prose blockquote{border-left:2px solid var(--accent);padding:4px 0 4px 24px;margin:30px 0;font-family:"Fraunces",serif;font-style:italic;font-size:20px;line-height:1.45;color:var(--paper);font-weight:300}
+.article .prose blockquote cite{display:block;margin-top:12px;font-style:normal;font-family:"Hanken Grotesk",sans-serif;font-size:13.5px;color:var(--muted)}
+.article .prose ul{list-style:none;margin:0 0 18px;padding:0;display:flex;flex-direction:column;gap:11px}
+.article .prose ul li{position:relative;padding-left:20px;color:var(--paper-dim);font-weight:300}
+.article .prose ul li::before{content:"";position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.post-source{max-width:72ch;margin-top:50px;padding-top:26px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+.post-source .foot-h{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;font-weight:500}
+.post-source a{display:block;color:var(--paper-dim);margin-bottom:8px;word-break:break-all;transition:color .25s}
+.post-source a:hover{color:var(--accent)}
+.article-cta{max-width:72ch;margin-top:50px;padding:34px 34px;border:1px solid rgba(255,90,48,.32);border-radius:18px;background:radial-gradient(700px circle at 90% -40%,rgba(255,90,48,.12),transparent 55%),linear-gradient(180deg,rgba(255,255,255,.025),transparent)}
+.article-cta h3{font-family:"Fraunces",serif;font-weight:500;font-size:23px;letter-spacing:-.01em;margin-bottom:10px}
+.article-cta p{color:var(--paper-dim);font-weight:300;font-size:15.5px;margin-bottom:22px;max-width:52ch}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);margin-top:44px;transition:color .25s}
+.back-link:hover{color:var(--accent)}
+.back-link span{color:var(--accent)}
+
+
+/* =======================================================
+   LIGHT THEME – Overrides fürs helle Redesign
+   ======================================================= */
+body::after{opacity:.025}
+header.scrolled{background:rgba(247,244,238,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.hero-glow{opacity:.5}
+.hero-glow.two{opacity:.55}
+/* Karten heben sich mit Weiß + weichem Schatten ab */
+.pillar,.serv,.post-card,.step,.quote{background:#fff;border-color:rgba(27,24,19,.10);box-shadow:0 1px 2px rgba(27,24,19,.05),0 18px 40px -30px rgba(27,24,19,.35)}
+.pillar:hover,.serv:hover,.post-card:hover{border-color:rgba(255,90,48,.55);box-shadow:0 14px 34px -18px rgba(27,24,19,.22)}
+.step:hover{background:#fff;box-shadow:0 14px 30px -18px rgba(27,24,19,.18)}
+.field input,.field select,.field textarea{background:#fff}
+.about-portrait{background:linear-gradient(145deg,#efe9dd,#e4dccd)}
+.btn.ghost{color:var(--paper);border-color:rgba(27,24,19,.20)}
+.btn.ghost:hover{border-color:var(--paper);box-shadow:none}
+.article-cta{background:radial-gradient(700px circle at 90% -40%,rgba(255,90,48,.09),transparent 55%),#fff;box-shadow:0 1px 2px rgba(27,24,19,.05),0 18px 40px -30px rgba(27,24,19,.30)}
+.article .prose blockquote{color:var(--paper)}
