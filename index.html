@@ -19,6 +19,7 @@
     <nav class="nav-links" id="navlinks" aria-label="Hauptnavigation">
       <a href="projektmanagement.html">Projektmanagement</a>
       <a href="marketing.html">Marketing</a>
+      <a href="blog.html">Blog</a>
       <a href="#kontakt">Kontakt</a>
       <a href="#kontakt" class="btn">Kostenloses Erstgespräch</a>
     </nav>
@@ -129,7 +130,8 @@
           <a href="mailto:mail@dennis-augustin.com"><span class="ic">✉</span> mail@dennis-augustin.com</a>
         </div>
       </div>
-      <form class="reveal d1" action="#" method="post" onsubmit="return false;">
+      <form class="reveal d1" action="contact.php" method="post" data-contact>
+        <input type="hidden" name="_hp" value="">
         <div class="row2">
           <div class="field"><label for="n">Name</label><input id="n" name="name" type="text" autocomplete="name" placeholder="Ihr Name"></div>
           <div class="field"><label for="e">E-Mail</label><input id="e" name="email" type="email" autocomplete="email" placeholder="name@beispiel.de"></div>
@@ -186,4 +188,4 @@
 <script src="assets/main.js"></script>
 </body>
 </html>
-              
+
